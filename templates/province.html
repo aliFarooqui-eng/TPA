@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>province</title>
-</head>
-<body>
+<form class="form-inline" action="/action_page.php">
+    <div class="form-group col">
+      <div class = "row">
+      	<label for="cnt">Email:</label>
+      </div>
 
-</body>
-</html>
+      <div class = "row" id = "cnt">
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+            </div>
+            {{form.cname(class_='form-control',placeholder=form.cname.label.text)}}
+
+        </div>
+         {%if get_flashed_messages() and get_flashed_messages()[0]["cname"]%}
+            <span class="text-danger">{{ get_flashed_messages()[0]["cname"][0]}}</span>
+          {% endif %}
+      </div>
+
+    </div>
+
+  </form>

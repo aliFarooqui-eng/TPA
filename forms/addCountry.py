@@ -7,4 +7,4 @@ class addCountry(FlaskForm):
 	code = StringField("code",validators=[DataRequired(message="Provide the code")])
 	s_c_name = StringField("short code",validators=[DataRequired(message="Provide the short name")])
 	status = SelectField('Status', choices=[(1, 'Active'), (0, 'Deactive')]) #(value,label)
-	submit=SubmitField("Update Account")
+	submit=SubmitField("ADD COUNTRY")
