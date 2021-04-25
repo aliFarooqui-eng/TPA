@@ -1,0 +1,91 @@
+{%extends "generalDomain.html"%}
+{% block contents %}
+<style>
+    .card-header{
+        background-color:;
+    }
+
+</style>
+<div class="mx-5">
+    <div class="card">
+        <div class = "card-header">
+            <h1><b>AREA ADD</b></h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="post"  class="form">
+            {{form.hidden_tag()}}
+
+                <div class ="row">
+                    <div class="form-group col-md-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                            </div>
+                            {{form.aname(class_='form-control',placeholder=form.aname.label.text)}}
+
+                        </div>
+                        {%if get_flashed_messages() and get_flashed_messages()[0]["aname"]%}
+                          <span class="text-danger">{{ get_flashed_messages()[0]["aname"][0]}}</span>
+                        {% endif %}
+
+
+                    </div>
+
+
+
+
+
+
+                     <div class="form-group  col-md-4 ">
+                        {{form.status}}
+
+                    </div>
+
+                </div>
+
+                <div class="row float-right">
+
+                    <div class="text-center ">
+                        {{form.submit(class_='btn btn-primary btn-block my-3')}}
+                    </div>
+            </form>
+                 </div>
+
+
+        </div>
+
+    </div>
+
+
+
+             <table id=""country_data" class="table">
+                <thead class = "thead-dark">
+                    <tr>
+                         <th scope="col">Area</th>
+                         <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in result %}
+                         <tr>
+                            <th scope="row">{{res[0]}}</th>
+
+                            {% if res[1] == 1 %}
+                               <td >Active</td>
+                            {% else %}
+                               <td >Deactive</td>
+
+                            {% endif %}
+
+                          </tr>
+
+
+                    {% endfor %}
+                </tbody>
+
+
+
+             </table>
+</div>
+
+{% endblock %}
