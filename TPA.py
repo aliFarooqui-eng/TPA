@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,url_for,request,flash
 from forms.addCountry import addCountry,Religion,Area,Tongue,BloodGroup
-from forms.academicDomain import Category
+from forms.academicDomain import Category,Section,Subject
 
 app = Flask(__name__)
 
@@ -212,6 +212,54 @@ def category():
    else:
       return render_template('category.html', form=form, result=myresult)
 
+
+@app.route('/section', methods=['GET', 'POST'])
+def section():
+   form = Section()
+
+   mycursor.execute("SELECT * FROM section")
+   myresult = mycursor.fetchall()
+
+
+   if form.validate_on_submit():
+
+
+      sec_name = form.secName.data
+
+      status = form.status.data
+
+      sql = "INSERT INTO section (sec_name,status) VALUES (%s, %s)"
+      val = (sec_name,status)
+      mycursor.execute(sql, val)
+
+      mydb.commit()
+      return redirect(url_for('section'))
+
+   else:
+      return render_template('section.html', form=form, result=myresult)
+
+@app.route('/subject', methods=['GET', 'POST'])
+def subject():
+   form = Subject()
+
+   mycursor.execute("SELECT * FROM subject")
+   myresult = mycursor.fetchall()
+
+   if form.validate_on_submit():
+
+      status = form.status.data
+      sub_name = form.subName.data
+      code = form.subNameCode.data
+
+
+      sql = "INSERT INTO subject (sub_name,code,status) VALUES (%s, %s, %s)"
+      val = (sub_name,code,status)
+      mycursor.execute(sql, val)
+
+      mydb.commit()
+      return redirect(url_for('subject'))
+
+   return render_template('subject.html', form=form,result = myresult)
 
 
 if __name__ == '__main__':

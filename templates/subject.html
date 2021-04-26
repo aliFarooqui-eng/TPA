@@ -1,0 +1,104 @@
+{%extends "academicDomain.html"%}
+{% block contents %}
+<style>
+    .card-header{
+        background-color:;
+    }
+
+</style>
+<div class="mx-5">
+    <div class="card">
+        <div class = "card-header">
+            <h1><b>SUBJECT ADD</b></h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="post"  class="form">
+            {{form.hidden_tag()}}
+
+                <div class ="row">
+                    <div class="form-group col-md-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                            </div>
+                            {{form.subName(class_='form-control',placeholder=form.subName.label.text)}}
+
+                        </div>
+                        {%if get_flashed_messages() and get_flashed_messages()[0]["subName"]%}
+                          <span class="text-danger">{{ get_flashed_messages()[0]["subName"][0]}}</span>
+                        {% endif %}
+
+
+                    </div>
+
+                    <div class="form-group  col-md-3">
+                        <div class="input-group input-group-alternative">
+                             <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                             </div>
+                             {{form.subNameCode(class_='form-control',placeholder=form.subNameCode.label.text)}}
+
+                         </div>
+                        {%if get_flashed_messages() and get_flashed_messages()[0]["subNameCode"]%}
+                            <span class="text-danger">{{ get_flashed_messages()[0]["subNameCode"][0]}}</span>
+                        {% endif %}
+                    </div>
+
+
+
+                     <div class="form-group  col-md-3 ">
+                        {{form.status}}
+
+                    </div>
+
+                </div>
+
+                <div class="row float-right">
+
+                    <div class="text-center ">
+                        {{form.submit(class_='btn btn-primary btn-block my-3')}}
+                    </div>
+            </form>
+                 </div>
+
+
+        </div>
+
+    </div>
+
+
+
+             <table id=""country_data" class="table">
+                <thead class = "thead-dark">
+                    <tr>
+                         <th scope="col">Subject name</th>
+                         <th scope="col">Subject code</th>
+
+                          <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in result %}
+                         <tr>
+                            <th scope="row">{{res[0]}}</th>
+                            <td >{{res[1]}}</td>
+
+                            {% if res[2] == 1 %}
+                               <td >Active</td>
+                            {% else %}
+                               <td >Deactive</td>
+
+                            {% endif %}
+
+                          </tr>
+
+
+                    {% endfor %}
+                </tbody>
+
+
+
+             </table>
+</div>
+
+{% endblock %}
